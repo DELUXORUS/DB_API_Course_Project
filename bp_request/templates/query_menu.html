@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню выбора запроса</title>
+    <link rel="stylesheet" href="{{ url_for('bp_request.static', filename='query_menu.css') }}">
+</head>
+<body>
+<main>
+    <h2>Выберите запрос для выполнения</h2>
+    <a href="{{ url_for('bp_request.input_handler', html_file='input_num_days.html') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Запрос 1: Сведения о клиентах, заключивших договор за некоторый промежуток времени до сегодняшнего дня
+        </button>
+    </a>
+    <a href="{{ url_for('bp_request.input_handler', html_file='input_unique_code.html') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Запрос 2: Максимальная цена услуги, начинающаяся с определённого кода
+        </button>
+    </a>
+    <a href="{{ url_for('main_menu') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Главное меню
+        </button>
+    </a>
+</main>
+</body>
+</html>

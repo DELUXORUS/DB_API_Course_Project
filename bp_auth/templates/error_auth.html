@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка авторизации</title>
+    <link rel="stylesheet" href="{{ url_for('bp_auth.static', filename='error_auth.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Ошибка авторизации</h1>
+        <a href="{{ url_for('bp_auth.auth') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Попробовать снова
+        </button>
+        <a href="{{ url_for('bp_auth.register') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Зарегестрироваться
+        </button>
+        <a href="{{ url_for('shutdown_program') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            Завершить работу
+        </button>
+    </a>
+    </main>
+</body>
+</html>

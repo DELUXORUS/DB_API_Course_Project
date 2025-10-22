@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка</title>
+    <link rel="stylesheet" href="{{ url_for('bp_request.static', filename='wrong.css') }}">
+</head>
+<body>
+    <h1>Что-то пошло не так</h1>
+    <a href="{{ url_for('main_menu') }}" style="text-decoration: none;">
+        <button style="padding: 10px 20px; cursor: pointer;">
+            В главное меню
+        </button>
+    </a>
+</body>
+</html>

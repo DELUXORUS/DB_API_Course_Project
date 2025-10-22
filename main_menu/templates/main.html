@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <h2>Главное меню</h2>
+    <a href="{{url_for('bp_request.query_menu')}}">Работа с запросами</a>
+    <br></br>
+    <a href="{{url_for('shutdown_program')}}">Завершение работы сессии</a>
+</body>
+</html>

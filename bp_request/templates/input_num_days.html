@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input_category</title>
+    <link rel="stylesheet" href="{{ url_for('bp_request.static', filename='input_num_days.css') }}">
+</head>
+<body>
+<main>
+    <h2>Ввод параметров поиска</h2>
+    <p>
+        <form action="result" method="post">  <!--action указывает на URL, на которые отправляются данные формы. Пустая строка - URL, где и находится форма. В post парметры не видны в адресной строке браузера (в get видны - get по умолчанию)-->
+        <label for="num_days">Количество дней</label>
+        <input type="text" name="param" id="num_days"> <!--label for = input id - связь поясняющей надписи с полем для ввода-->
+        <input type="hidden" name="sql_file" value="contracts_for_period.sql">
+        <input type="hidden" name="col_headers_file" value="name_cols_contracts_for_period.json">
+        <br><br>
+        <input type="submit" value="Отправить"> <!--Submit - появляется кнопка нажатие которой отправляет данные на бек-->
+        </form>
+    </p>
+</main>
+</body>
+</html>

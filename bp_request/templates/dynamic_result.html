@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('bp_request.static', filename='dynamic_result.css') }}">
+</head>
+<body>
+<main>
+    <h2>{{ title }}</h2>
+    <p>
+        <table border="1">
+            <tr class="tab_title">
+                {% for name_col in name_cols %}
+                    <td>{{ name_col }}</td>
+                {% endfor %}
+            </tr>
+            {% for row in data_results %}
+                <tr>
+                    {% for i in range(name_cols|length) %}
+                        <td>{{ row[i] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </p>
+    <form action="./" method="get">
+        <button type="submit">Главное меню запросов</button>
+    </form>
+</main>
+</body>
+</html>
