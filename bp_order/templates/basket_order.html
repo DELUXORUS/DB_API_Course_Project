@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подключение услуг</title>
+    <link rel="stylesheet" href="{{ url_for('bp_order.static', filename='basket_order.css') }}">
+</head>
+<body>
+    <div align = center>
+        <br><br>
+        <a href = "{{ url_for('bp_order.save_order')}}">Оплатить</a> <br><br>
+        <a href = "{{ url_for('main_menu')}}">Главное меню</a>
+    </div>
+
+    {% import 'basket_utils.html' as utils %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Услуги доступные для подключения</h2>
+                {% if items %}
+                    {% for item in items %}
+                        {{ utils.render_item(item, connected_favors, show_form = True, show_button_disconnect = False) }}
+                    {% endfor %}
+                {% else %}
+                    <p>Нет доступных услуг</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <h2>Выбранные для подключения услуги</h2>
+                <a href="{{ url_for('bp_order.clear_basket') }}">Отменить выбор услуг</a>
+                {% if basket %}
+                    {% for key in basket %}
+                        {{ utils.render_item(basket[key], connected_favors,  show_form=False, show_button_disconnect = False) }}
+                    {% endfor %}
+                {% else %}
+                    <p>Ни одной услуги для подключения не выбрано</p>
+                {% endif %}
+            </div>
+            <div class="connected_favors">
+                <h2>Подключенные услуги</h2>
+                {% if connected_favors %}
+                    {% for key in connected_favors %}
+                        {{ utils.render_item(connected_favors[key], key, show_form=False, show_button_disconnect = True) }}
+                    {% endfor %}
+                {% else %}
+                    <p>Ни одной услуги не подключено</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

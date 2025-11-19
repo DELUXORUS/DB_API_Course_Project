@@ -1,0 +1,5 @@
+{
+    "bp_order": {"url": "bp_order.order", "name": "Подключить услуги"},
+    "bp_request": {"url": "bp_request.query_menu", "name": "Работа с запросами"},
+    "bp_report": {"url": "bp_report.report_menu", "name": "Работа с отчётами"}
+}

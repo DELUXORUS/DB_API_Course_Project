@@ -1,0 +1,102 @@
+body {
+    background: #f9f9fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background: #fff;
+    padding: 38px 32px 28px 32px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(86, 108, 255, 0.09);
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 2rem;
+    max-width: 450px;
+    margin-bottom: 27px;
+    color: #566cff;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+form {
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;                                /* равномерные промежутки между всеми элементами формы */
+    align-items: center;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #555a81;
+    text-align: center;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.07rem;
+    border-radius: 9px;
+    border: 1.7px solid #ccc;
+    background: #fafbfc;
+    transition: border-color 0.22s;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 0;
+    font-family: inherit;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #566cff;
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 13px 0;
+    background: #566cff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.07rem;
+    font-weight: 700;
+    box-shadow: 0 2px 7px rgba(86, 108, 255, 0.06);
+    cursor: pointer;
+    transition: background 0.22s;
+    font-family: inherit;
+    margin: 0;
+    margin-bottom: 0;
+}
+
+button[type="submit"]:hover {
+    background: #4352d7;
+}
+
+/* Flash-сообщения (warning/info у формы) */
+.flash {
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    box-shadow: 0 2px 7px rgba(86, 108, 255, 0.05);
+    font-weight: 500;
+    text-align: center;
+    color: #566cff;
+    background: #eef1ff;
+    border: 1.2px solid #dbe1f7;
+}

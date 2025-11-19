@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="{{ url_for('bp_auth.static', filename='no_access.css') }}">
 </head>
 <body>
-    <h1>У вас нет прав на эту функциональность</h1>
-    <a href="{{ url_for('main_menu') }}" style="text-decoration: none;">
-      <button style="padding: 10px 20px; cursor: pointer;">
-          В главное меню
-      </button>
-    <a/>
+    <div class="access-card">
+        <h1>У вас нет прав на эту функциональность</h1>
+        <div class="menu-btn-wrap">
+            <a href="{{ url_for('main_menu') }}">
+                <button class="menu-btn">Главное меню</button>
+            </a>
+        </div>
+    </div>
 </body>
+
 </html>

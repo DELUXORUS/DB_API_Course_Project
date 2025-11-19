@@ -1,6 +1,3 @@
-select id, role from (
-select in_id as id, login, password, role from internal_user
-union
-select ex_id as id, login, password, role from external_user
-) as result
-    where login = (%s) and password = (%s)
+select in_id as id, r.role, db_config from internal_user as iu
+    join role as r on r.role = iu.role
+        where login = (%s) and password = (%s)

@@ -7,4 +7,4 @@ bp = Blueprint(
     static_folder="static",                 # относительный путь от папки bp_request
 )
 from . import access
-from . import route
+from . import auth

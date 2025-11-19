@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню отчётов</title>
+    <link rel="stylesheet" href="{{ url_for('bp_report.static', filename='report_menu.css') }}">
+</head>
+<body>
+    <div id="message-container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="message-box">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="container">
+        <h1>Меню отчётов</h1>
+        <div class="reports-buttons">
+            {% for report in report_params %}
+                <button type="button"
+                    onclick="openDialog(
+                        '{{ report.name_report }}',
+                        '{{ report.col_headers_file }}',
+                        '{{ report.name_procedure }}'
+                    )">
+                    {{ report.title }}
+                </button>
+            {% endfor %}
+            <a href="{{ url_for('main_menu') }}">
+                <button type="button" class="main-menu-btn">
+                    Главное меню
+                </button>
+            </a>
+        </div>
+    </div>
+    <div id="dialog-backdrop" class="hidden"></div>
+    <div id="report-dialog" class="dialog hidden">
+<!--        <h2 id="dialog-title"></h2>-->
+        <form method="post" id="select-form">
+            <input type="hidden" name="name_report" id="name-report-hidden">
+            <input type="hidden" name="name_procedure" id="name-procedure-hidden">
+            <input type="hidden" name="col_headers_file" id="col-headers-hidden">
+            <button type="submit" formaction="{{ url_for('bp_report.param_input') }}" onclick="setForCreate()">Создать отчёт</button>
+            <button type="submit" formaction="{{ url_for('bp_report.param_input') }}" onclick="setForView()">Посмотреть отчёт</button>
+            <button type="button" onclick="closeDialog()" class="close-btn">Отмена</button>
+        </form>
+    </div>
+    <script>
+        let dialogParams = {
+            name_report: "",
+            col_headers_file: "",
+            name_procedure: ""
+        };
+
+        function openDialog(name_report, col_headers_file, name_procedure) {
+<!--            document.getElementById("dialog-title").textContent = name_report;-->
+            dialogParams.name_report = name_report;
+            dialogParams.col_headers_file = col_headers_file;
+            dialogParams.name_procedure = name_procedure;
+            // Сброс всех скрытых полей (на случай отмены)
+            document.getElementById("name-report-hidden").value = "";
+            document.getElementById("col-headers-hidden").value = "";
+            document.getElementById("name-procedure-hidden").value = "";
+            document.getElementById("report-dialog").classList.remove("hidden");
+            document.getElementById("dialog-backdrop").classList.remove("hidden");
+        }
+
+        function setForCreate() {
+            document.getElementById("name-procedure-hidden").value = dialogParams.name_procedure;
+            document.getElementById("name-report-hidden").value = ""; // сброс
+            document.getElementById("col-headers-hidden").value = ""; // сброс
+        }
+
+        function setForView() {
+            document.getElementById("name-report-hidden").value = dialogParams.name_report;
+            document.getElementById("col-headers-hidden").value = dialogParams.col_headers_file;
+            document.getElementById("name-procedure-hidden").value = ""; // сброс
+        }
+
+        function closeDialog() {
+            document.getElementById("report-dialog").classList.add("hidden");
+            document.getElementById("dialog-backdrop").classList.add("hidden");
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.message-box').forEach(function(el) {
+                setTimeout(function() {
+                    el.remove();
+                }, 4000);  // столько же, как длится анимация
+            });
+        });
+    </script>
+</body>
+</html>

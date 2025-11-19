@@ -1,3 +1,4 @@
-{ "manager": ["bp_auth"],
-  "admin": ["bp_request", "bp_report"],
-  "client": ["bp_auth"]}
+{ "manager": ["bp_auth", "bp_report"],
+  "admin": ["bp_auth", "bp_request", "bp_report"],
+  "client": ["bp_auth", "bp_order"],
+  "root":  ["bp_auth", "bp_request", "bp_order", "bp_report"]}

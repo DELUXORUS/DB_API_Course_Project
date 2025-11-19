@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание отчёта</title>
+    <link rel="stylesheet" href="{{ url_for('bp_report.static', filename='dynamic_new_report.css') }}">
+</head>
+<body>
+<main>
+    <h2>Введите год и месяц для создания отчёта</h2>
+    <p>
+        <form action="
+                         {% if params.get('name_procedure') %}
+                            {{ url_for('bp_report.add_report') }}
+                         {% else %}
+                            {{ url_for('bp_report.get_report') }}
+                         {% endif %}
+                     "
+            method="post"
+        >
+            <label for="year">Год</label>
+            <input type="text" name="year" id="year" value="{{ request.form.get('year', '') }}">
+            <label for="month">Месяц</label>
+            <input type="text" name="month" id="month" value="{{ request.form.get('month', '') }}">
+
+            {% if params.get('name_procedure') %}
+                <input type="hidden" name="name_procedure" value="{{ params.get('name_procedure') }}">
+            {% else %}
+                <input type="hidden" name="name_report" value="{{ params.get('name_report', '') }}">
+                <input type="hidden" name="col_headers_file" value="{{ params.get('col_headers_file', '') }}">
+            {% endif %}
+
+            <input type="submit" value="Отправить">
+        </form>
+    </p>
+</main>
+</body>
+</html>

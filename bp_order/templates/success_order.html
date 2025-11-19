@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Услуги успешно подключены!</title>
+    <link rel="stylesheet" href="{{ url_for('bp_order.static', filename='basket_order.css') }}">
+    <style>
+        body {
+            background-color: #f9f9fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main {
+            text-align: center;
+            background-color: white;
+            padding: 40px 60px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(86, 108, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 13px;
+        }
+        main a {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        h2 {
+            color: #566cff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .main-btn {
+            background-color: #566cff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 19px;
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
+            text-align: center;
+            white-space: normal;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .main-btn:hover {
+            background-color: #4352d7;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h2>Услуги подключены!</h2>
+        <a href="{{ url_for('main_menu') }}" class="main-btn">Главное меню</a>
+    </main>
+</body>
+</html>

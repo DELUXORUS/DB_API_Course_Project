@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёт</title>
+    <link rel="stylesheet" href="{{ url_for('bp_report.static', filename='dynamic_get_report.css') }}">
+</head>
+<body>
+<main>
+    <h2>Отчёт</h2>
+    <p>
+        <table border="1">
+            <tr class="tab_title">
+                {% for name_col in name_cols %}
+                    <td>{{ name_col }}</td>
+                {% endfor %}
+            </tr>
+            {% for row in data_results %}
+                <tr>
+                    {% for i in range(name_cols|length) %}
+                        <td>{{ row[i] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </p>
+    <form action="./" method="get">
+        <button type="submit">Главное меню отчётов</button>
+    </form>
+</main>
+</body>
+</html>

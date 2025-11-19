@@ -2,53 +2,86 @@ body {
     background-color: #f9f9fb;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background: #fff;
+    padding: 42px 34px 36px 34px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(86, 108, 255, 0.10);
+    min-width: 425px;
+    max-width: 560px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 27px;
+    color: #566cff;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* Все группы ссылок с кнопками — по центру и с отступом */
+main a {
+    width: 99%;
+    text-align: center;
+    margin: 0 0 18px 0;
+    padding: 0;
+    text-decoration: none;
     display: flex;
     justify-content: center;
 }
 
-main {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-    max-width: 650px;
-    width: 100%;
-    padding: 30px 40px;
-}
-
-h2 {
-    text-align: center;
-    color: #3b4a77;
-    margin-bottom: 30px;
-    font-weight: 700;
-    font-size: 1.75rem;
-}
-
-a {
+/* Кнопки-запросы — большие, перенос текста разрешён */
+main button {
     display: block;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-button {
-    background-color: #566cff;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    padding: 12px 30px;
-    font-size: 1.1rem;
+    padding: 18px 22px;
+    background: #566cff;
+    color: #fff;
+    font-size: 1.07rem;
     font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(86, 108, 255, 0.07);
     cursor: pointer;
-    transition: background-color 0.25s ease;
-    width: 100%;
-    max-width: 100%;
-}
-
-button:hover {
-    background-color: #3c4fd8;
-}
-
-button:focus {
+    margin: 0;
+    transition: background 0.23s;
     outline: none;
-    box-shadow: 0 0 6px 2px #4258f5;
+    white-space: normal;        /* разрешаем перенос на несколько строк */
+    line-height: 1.39;
+    text-align: center;
+    word-break: break-word;
+    box-sizing: border-box;
+    min-width: 260px;
+    max-width: 520px;
+}
+
+main button:hover {
+    background: #4352d7;
+}
+
+/* Главное меню — компактнее и светлее */
+main a:last-child button {
+    background: #e9eaf3;
+    color: #566cff;
+    min-width: 150px;
+    max-width: 240px;
+    padding: 13px 0;
+    border-radius: 10px;
+    font-size: 1.03rem;
+    box-shadow: 0 1px 4px rgba(86, 108, 255, 0.07);
+    transition: background 0.23s, color 0.18s;
+}
+
+main a:last-child button:hover {
+    background: #dadcf3;
+    color: #4352d7;
 }

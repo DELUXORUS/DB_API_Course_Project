@@ -1,0 +1,28 @@
+{% macro render_item(item, id_connected_favor, show_form=False, show_button_disconnect=False) %}
+
+<div>
+    <p>
+        <span>Имя услуги</span>
+        <span>{{item['name_favor']}}</span>
+        <span>Стоимость</span>
+        <span>{{item['cost_favor']}}</span>
+    </p>
+</div>
+
+{% if show_button_disconnect %}
+<form action="{{ url_for('bp_order.disconnect_favor') }}" method="POST">
+    <input type="hidden" name="id_favor" value="{{ id_connected_favor }}">
+    <button type="submit">Отключить</button>
+</form>
+{% endif %}
+
+{% if show_form %}
+<div>
+    <form action="" method="POST">
+        <input type="hidden" name="id_favor" value="{{ item['id_favor'] }}">
+        <button type="submit">Подключить</button>
+    </form>
+</div>
+{% endif %}
+{% endmacro %}
+
