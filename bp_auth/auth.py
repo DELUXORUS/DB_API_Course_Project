@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+from base64 import b64encode
 from flask import session, redirect, url_for, request, render_template, current_app
 from database.DB_operations import select
 from database.sql_provider import SQLProvider
@@ -20,9 +21,9 @@ def check_user():
     params = list(user_input.values())
     internal_user_info_pack = model_route(provider, params, 'get_user.sql', select)
     internal_user_info = internal_user_info_pack.result
-    session.permanent = True
+    print("internal_user_info: ", internal_user_info)
 
-    if internal_user_info_pack.status:
+    if internal_user_info:
         user_info = internal_user_info[0]
         # print('user_dict = ', user_info)
         session['user_id'] = user_info[0]
@@ -36,9 +37,12 @@ def check_user():
     else:
         base_url = 'http://127.0.0.1:5000/external_auth_service/api'
         url = f'{base_url}/auth'
-        data = {'login': user_input['login'], 'password': user_input['password']}
+        login = user_input['login']
+        password = user_input['password']
+        # data = {'login': user_input['login'], 'password': user_input['password']}
 
-        response = requests.post(url, json=data)
+        # response = requests.post(url, json=data)
+        response = requests.get(url, headers={'Authorization': create_basic_auth_token(login, password)})
         status = response.status_code
         response_json = response.json()
 
@@ -48,6 +52,16 @@ def check_user():
         if status == 200:
             session['user_group'] = "client"
             session['user_id'] = response_json['user_id']
+            session.permanent = True
             return redirect(url_for('main_menu'))
         else:
-            return render_template('error_auth.html')
+            # return render_template('error_auth.html')
+            return response_json
+
+def create_basic_auth_token(login, password):
+    credentials_b64 = b64encode(f'{login}:{password}'.encode('ascii')).decode('ascii')
+    ccc = b64encode(f'{login}:{password}'.encode('ascii'))
+    print('ccc: ', ccc)
+    print('credentials_b64: ', credentials_b64)
+    token = f'Basic {credentials_b64}'
+    return token

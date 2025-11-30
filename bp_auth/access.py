@@ -16,10 +16,10 @@ def group_require(func):
     def wrapper(*args, **kwargs):
         if 'user_group' in session:
             access = current_app.config['db_access']
+            user_role = session.get('user_group')
             user_request = request.endpoint.split('.')[0]
             print('request.endpoint', request.endpoint)
             print('user_request', user_request)
-            user_role = session.get('user_group')
             if user_role in access and user_request in access[user_role]:
                 return func(*args, **kwargs)
             else:

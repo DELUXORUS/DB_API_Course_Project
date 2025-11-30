@@ -1,9 +1,10 @@
 import json
 import os
+from base64 import b64decode
 from flask import request, jsonify, Flask, render_template, flash, redirect, url_for
 from external_auth_service.model_route import model_route
-from database.sql_provider import SQLProvider
-from database.DB_operations import select, insert
+from external_auth_service.database.sql_provider import SQLProvider
+from external_auth_service.database.DB_operations import select, insert
 
 
 service = Flask(__name__)
@@ -17,15 +18,23 @@ with open('../data/cache_config.json') as f:
 with open('../data/db_config_client.json') as f:
     service.config['db_config'] = json.load(f)
 
-@service.route('/external_auth_service/api/auth', methods=['POST'])
+# @service.route('/external_auth_service/api/auth', methods=['POST'])
+@service.route('/external_auth_service/api/auth', methods=['GET'])
 def auth():
-    params = list(request.json.values())
+    if not valid_authorization_request(request):
+        return jsonify({'message': 'Bad request'}), 400
+    # params = list(request.json.values())
+    try:
+        params = get_auth_token(request)
+    except Exception as e:
+        return jsonify({'message': 'except'}), 400
+
     result_info = model_route(provider, params, 'get_user.sql', select)
 
     if result_info.status:
         return jsonify({'message': 'Successful authorization', 'user_id': result_info.result}), 200
     else:
-        return jsonify({'message': 'Failed authorization'}), 400
+        return jsonify({'message': 'User not found'}), 400
 
 @service.route('/external_auth_service/register', methods=['GET'])
 def input_register():
@@ -54,5 +63,25 @@ def register():
         flash('Такой пользователь уже существует!')
         return redirect(url_for('input_register'))
 
+def get_auth_token(api_request)-> list:
+    header = api_request.headers.get('Authorization')
+    token = header.split()[-1]
+    params = b64decode(token.encode('ascii')).decode('ascii').split(':')
+    print('params: ', params)
+    if len(params) != 2:
+        raise ValueError('Invalid login or password')
+    return params
+
+def valid_authorization_request(api_request):
+    header = api_request.headers.get('Authorization')
+    if not header:
+        return False
+    if not header.startswith('Basic '):
+        return False
+    if len(header) <= len('Basic '):
+        return False
+    return True
+
 if __name__ == '__main__':
     service.run(host='127.0.0.1', port=5000)
+

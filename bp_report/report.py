@@ -28,6 +28,7 @@ def param_input():
     return render_template("param_input.html", params=params)
 
 @bp.route('/get_report', methods=['POST'])
+@group_require
 def get_report():
     params = [request.form.get('year'), request.form.get('month')]
     result_info = model_route(provider, params, 'get_report.sql', request.form['name_report'], select)
@@ -45,6 +46,7 @@ def get_report():
         return render_template("no_reports.html")
 
 @bp.route('/add_report', methods=['POST'])
+@group_require
 def add_report():
     user_input = request.form
     params = [user_input.get('year'), user_input.get('month')]
